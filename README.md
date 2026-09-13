@@ -1,12 +1,12 @@
 # Fifteen GBFS Stations for Home Assistant
 
 Resilient Home Assistant custom integration for Fifteen bike-sharing networks,
-including GraouLib’ Metz. It automatically finds the working Fifteen GBFS
+including Graou’Lib Metz. It automatically finds the working Fifteen GBFS
 cluster and refuses to publish bike counts that cannot be trusted.
 
 > [!IMPORTANT]
 > This is an independent community project. It is not affiliated with or
-> endorsed by Fifteen, GraouLib’ or Eurométropole de Metz.
+> endorsed by Fifteen, Graou’Lib or Eurométropole de Metz.
 
 ## Features
 
@@ -109,7 +109,7 @@ This project does not use Fifteen's private application API. Endpoint layout,
 cluster names and feed behaviour remain controlled by the provider and may
 change without notice.
 
-GBFS data and the Fifteen and GraouLib’ names remain subject to their
+GBFS data and the Fifteen and Graou’Lib names remain subject to their
 respective owners' terms and rights.
 
 ## License
