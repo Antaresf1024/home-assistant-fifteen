@@ -1,0 +1,62 @@
+{
+  "title": "Fifteen GBFS Stations",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect a Fifteen network",
+        "description": "Enter the network identifier, for example {example}.",
+        "data": {
+          "network": "Network identifier"
+        }
+      },
+      "stations": {
+        "title": "Select stations",
+        "description": "{count} stations were found on {network}.",
+        "data": {
+          "stations": "Stations"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to the GBFS feed",
+      "not_found": "No Fifteen GBFS feed was found for this network",
+      "no_stations": "The feed does not contain any stations"
+    },
+    "abort": {
+      "already_configured": "This network is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure the network",
+        "data": {
+          "stations": "Stations",
+          "scan_interval": "Polling interval",
+          "max_age": "Maximum accepted data age",
+          "clusters": "Fifteen clusters"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "bikes_available": {"name": "Bikes available"},
+      "docks_available": {"name": "Docks available"},
+      "bikes_disabled": {"name": "Bikes disabled"},
+      "docks_disabled": {"name": "Docks disabled"},
+      "fill_level": {"name": "Fill level"},
+      "last_reported": {"name": "Last station report"},
+      "capacity": {"name": "Capacity"},
+      "feed_host": {"name": "Feed host"},
+      "feed_updated": {"name": "Feed updated"},
+      "tracked_total": {"name": "Bikes on followed stations"}
+    },
+    "binary_sensor": {
+      "renting": {"name": "Rental possible"},
+      "returning": {"name": "Return possible"},
+      "installed": {"name": "Station installed"},
+      "feed_problem": {"name": "Feed problem"}
+    }
+  }
+}

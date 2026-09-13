@@ -1,0 +1,62 @@
+{
+  "title": "Stations GBFS Fifteen",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connecter un réseau Fifteen",
+        "description": "Saisissez l’identifiant du réseau, par exemple {example}.",
+        "data": {
+          "network": "Identifiant du réseau"
+        }
+      },
+      "stations": {
+        "title": "Sélectionner les stations",
+        "description": "{count} stations trouvées sur {network}.",
+        "data": {
+          "stations": "Stations"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossible de joindre le flux GBFS",
+      "not_found": "Aucun flux GBFS Fifteen trouvé pour ce réseau",
+      "no_stations": "Le flux ne contient aucune station"
+    },
+    "abort": {
+      "already_configured": "Ce réseau est déjà configuré"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configurer le réseau",
+        "data": {
+          "stations": "Stations",
+          "scan_interval": "Intervalle d’interrogation",
+          "max_age": "Âge maximal accepté des données",
+          "clusters": "Clusters Fifteen"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "bikes_available": {"name": "Vélos disponibles"},
+      "docks_available": {"name": "Places libres"},
+      "bikes_disabled": {"name": "Vélos indisponibles"},
+      "docks_disabled": {"name": "Places indisponibles"},
+      "fill_level": {"name": "Taux de remplissage"},
+      "last_reported": {"name": "Dernier relevé station"},
+      "capacity": {"name": "Capacité"},
+      "feed_host": {"name": "Hôte du flux"},
+      "feed_updated": {"name": "Flux mis à jour"},
+      "tracked_total": {"name": "Vélos sur les stations suivies"}
+    },
+    "binary_sensor": {
+      "renting": {"name": "Location possible"},
+      "returning": {"name": "Restitution possible"},
+      "installed": {"name": "Station installée"},
+      "feed_problem": {"name": "Flux en défaut"}
+    }
+  }
+}
