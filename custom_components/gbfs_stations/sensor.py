@@ -222,14 +222,14 @@ class GbfsFeedHostSensor(GbfsNetworkEntity, SensorEntity):
 
     @property
     def native_value(self) -> str | None:
-        if self.coordinator.data is None or self.coordinator.data.location is None:
+        if self.coordinator.data is None:
             return None
         return self.coordinator.data.location.host
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
         data = self.coordinator.data
-        if data is None or data.location is None:
+        if data is None:
             return {}
         return {
             ATTR_SOURCE_URL: data.location.status_url,

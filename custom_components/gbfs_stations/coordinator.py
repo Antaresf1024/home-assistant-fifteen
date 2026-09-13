@@ -12,7 +12,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_SCAN_INTERVAL
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeassistant.util import dt as dt_util
 
 from . import api
@@ -38,7 +38,7 @@ _LOGGER = logging.getLogger(__name__)
 class GbfsData:
     """Instantané cohérent servi aux entités."""
 
-    location: api.FeedLocation | None
+    location: api.FeedLocation
     stations: dict[str, dict[str, Any]] = field(default_factory=dict)
     info: dict[str, dict[str, Any]] = field(default_factory=dict)
     vehicle_types: dict[str, str] = field(default_factory=dict)
@@ -47,7 +47,6 @@ class GbfsData:
     age: float | None = None
     stale: bool = False
     stale_stations: set[str] = field(default_factory=set)
-    error: str | None = None
 
     def usable(self, station_id: str) -> bool:
         """Vrai si la valeur de cette station peut être publiée telle quelle.
@@ -222,34 +221,7 @@ class GbfsCoordinator(DataUpdateCoordinator[GbfsData]):
                     candidate = swept
 
         if candidate is None:
-            # Une panne du fournisseur ne doit pas transformer une incertitude
-            # métier en indisponibilité technique Home Assistant. On conserve
-            # uniquement le contexte utile au diagnostic, on marque
-            # l'instantané comme périmé, et toutes les mesures dynamiques
-            # publieront donc `unknown`.
-            previous = self.data
-            last_updated = previous.last_updated if previous else None
-            age = (
-                None
-                if last_updated is None
-                else max(0.0, time.time() - last_updated.timestamp())
-            )
-            _LOGGER.warning(
-                "Aucun cluster ne répond pour %s : valeurs publiées en inconnu",
-                self.network,
-            )
-            return GbfsData(
-                location=self._location or (previous.location if previous else None),
-                stations=previous.stations if previous else {},
-                info=self._info or (previous.info if previous else {}),
-                vehicle_types=self._types or (previous.vehicle_types if previous else {}),
-                system=self._system or (previous.system if previous else {}),
-                last_updated=last_updated,
-                age=age,
-                stale=True,
-                stale_stations=set(self.station_ids),
-                error="aucun cluster ne répond",
-            )
+            raise UpdateFailed("aucun cluster ne répond")
 
         await self._async_refresh_static(candidate.location)
 

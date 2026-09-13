@@ -60,11 +60,15 @@ when:
 - every selected station is present;
 - each selected station has a recent `last_reported` timestamp.
 
-When any of these checks fails, dynamic measurements become `unknown`.
-The total across followed stations is also `unknown` if a single station
-cannot be trusted. During a complete provider outage, the integration stays
-loaded, the feed problem entity turns on, and availability remains `unknown`
-instead of retaining an old count.
+When a feed responds but any of these checks fails, dynamic measurements
+become `unknown`. The total across followed stations is also `unknown` if a
+single station cannot be trusted.
+
+A complete transport outage is intentionally different: if no cluster
+responds at all, the coordinator update fails and its measurement entities
+become `unavailable`. This distinguishes an unreachable service from a feed
+that responded with uncertain data. The **Feed problem** entity remains
+available and reports the outage.
 
 ### Meaning of `is_renting`
 

@@ -97,8 +97,6 @@ class GbfsFeedProblem(GbfsNetworkEntity, BinarySensorEntity):
         data = self.coordinator.data
         if not self.coordinator.last_update_success or data is None:
             return "flux injoignable"
-        if data.error:
-            return data.error
         if data.stale:
             return (
                 "aucun horodatage exploitable"
@@ -123,10 +121,6 @@ class GbfsFeedProblem(GbfsNetworkEntity, BinarySensorEntity):
             "reason": self._diagnosis,
             "age_seconds": None if data is None or data.age is None else round(data.age),
             "max_age_seconds": self.coordinator.max_age,
-            "host": (
-                None
-                if data is None or data.location is None
-                else data.location.host
-            ),
+            "host": None if data is None else data.location.host,
             "stale_stations": sorted(data.stale_stations) if data else [],
         }
