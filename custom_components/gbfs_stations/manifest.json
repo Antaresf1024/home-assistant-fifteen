@@ -1,7 +1,6 @@
 {
   "domain": "gbfs_stations",
   "name": "Fifteen GBFS Stations",
-  "categories": ["vehicles_transport.public_transport", "vehicles_transport.bikes_scooters"],
   "codeowners": ["@Antaresf1024"],
   "config_flow": true,
   "documentation": "https://github.com/Antaresf1024/home-assistant-fifteen",
